@@ -9,7 +9,7 @@ const uuid = () => UUID.v1();
 // 生成 token
 const createToken = (data = {}, dayCount = 7) => {
   const obj = {};
-  const secret = 'Remons';
+  const secret = 'paichan';
   obj.data = data;
   obj.ctime = new Date().getTime();
   obj.expiresIn = 1000 * 60 * 60 * 24 * dayCount;
@@ -18,7 +18,7 @@ const createToken = (data = {}, dayCount = 7) => {
 // 验证 token
 const varifyToken = (token) => {
   let result = null;
-  const secret = 'Remons';
+  const secret = 'paichan';
   let { data, ctime, expiresIn } = jwt.verify(token, secret);
   const nowTime = new Date().getTime();
   if (nowTime - ctime < expiresIn) {

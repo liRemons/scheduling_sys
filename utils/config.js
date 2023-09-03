@@ -1,6 +1,6 @@
-const DES_KEY = 'remons';
+const DES_KEY = 'paichan';
 
-const DES_IV = 'lrq';
+const DES_IV = '112233';
 
 module.exports = {
   DES_KEY,
