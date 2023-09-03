@@ -131,6 +131,7 @@ const login = async (ctx) => {
     };
     return;
   }
+
   if (encrypt({ DES_IV, DES_KEY, MSG: password }) === result.data[0].password) {
     ctx.body = {
       ...result,
