@@ -82,7 +82,7 @@ const addUser = async (ctx) => {
     method: 'POST',
   });
   let searchSql = `select * from user where 1=1 and account='${account}'`;
-  const result = await search({ searchSql });
+  const result = await search({ sql: searchSql });
   if (result.data.length) { 
     ctx.body = {
       success: false,
