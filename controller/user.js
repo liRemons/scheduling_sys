@@ -81,6 +81,16 @@ const addUser = async (ctx) => {
     ctx,
     method: 'POST',
   });
+  let searchSql = `select * from user where 1=1 and account='${account}'`;
+  const result = await search({ searchSql });
+  if (result.data.length) { 
+    ctx.body = {
+      success: false,
+      msg: '用户重复',
+      code: 200,
+    };
+    return
+  }
   let sql = `INSERT INTO user
     (id,account,password,photo,name) VALUES (
       '${uuid()}',
