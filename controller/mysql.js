@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 const pool = mysql.createPool({
-  host: '8.134.180.205',
+  host: '8.136.206.131',
   user: 'root',
-  password: 'Paichan112233.',
+  password: 'Lrq370353.0353',
   database: 'scheduling',
   port: '3306',
   multipleStatements: true, // 允许多条sql同时执行
