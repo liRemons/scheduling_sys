@@ -81,6 +81,36 @@ const addUser = async (ctx) => {
     ctx,
     method: 'POST',
   });
+  let userId = '';
+  if (ctx.headers.remons_token) {
+    userId = varifyToken(ctx.headers.remons_token).id;
+  }
+  let sqlUserId = `select * from user where id='${userId}'`;
+  const userResult = await search({ sql: sqlUserId });
+  let role = '';
+  if (userResult.data.length) {
+    if ((userResult.data[0].role || '').includes('admin')) {
+      role = 'admin';
+    }
+  }
+  if (role !== 'admin') {
+    ctx.body = {
+      code: 403,
+      success: false,
+      msg: '无权限',
+    };
+    return;
+  }
+  let searchSql = `select * from user where 1=1 and account='${account}'`;
+  const result = await search({ sql: searchSql });
+  if (result.data.length) { 
+    ctx.body = {
+      success: false,
+      msg: '用户重复',
+      code: 200,
+    };
+    return
+  }
   let sql = `INSERT INTO user
     (id,account,password,photo,name) VALUES (
       '${uuid()}',
